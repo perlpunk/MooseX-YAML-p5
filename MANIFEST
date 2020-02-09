@@ -3,7 +3,6 @@ lib/MooseX/YAML.pm
 Makefile.PL
 MANIFEST			This list of files
 MANIFEST.SKIP
+META.yml			Module meta-data (added by MakeMaker)
 t/basic.t
 t/fq.t
-META.yml                                 Module meta-data (added by MakeMaker)
-SIGNATURE                                Public-key signature (added by MakeMaker)

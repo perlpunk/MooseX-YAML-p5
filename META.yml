@@ -1,20 +1,21 @@
---- #YAML:1.0
+---
 name:               MooseX-YAML
 version:            0.04
-abstract:           ~
-author:  []
-license:            unknown
+abstract:           DWIM loading of Moose objects from YAML
+author:
+  - Yuval Kogman <nothingmuch@woobling.org>
+license:            perl
 distribution_type:  module
 configure_requires:
     ExtUtils::MakeMaker:  0
 build_requires:
     ExtUtils::MakeMaker:  0
 requires:
-    MooseX::Blessed::Reconstruct:  0.03
-    namespace::clean:     0
-    Sub::Exporter:        0.982
-    Test::use::ok:        0
-    YAML:                 0
+    MooseX::Blessed::Reconstruct:  '0.03'
+    namespace::clean:     '0'
+    Sub::Exporter:        '0.982'
+    Test::use::ok:        '0'
+    YAML:                 '0'
 no_index:
     directory:
         - t
