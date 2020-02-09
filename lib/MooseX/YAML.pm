@@ -35,13 +35,25 @@ sub _resolve {
 
 		if ( exists $flags->{-xs} ) {
 			require YAML::XS;
-			return YAML::XS->can($routine);
+			my $sub = YAML::XS->can($routine);
+			return sub {
+				local $YAML::XS::LoadBlessed = 1;
+				$sub->(@_);
+			};
 		} elsif ( exists $flags->{-syck} ) {
 			require YAML::Syck;
-			return YAML::Syck->can($routine);
+			my $sub = YAML::Syck->can($routine);
+			return sub {
+				local $YAML::Syck::LoadBlessed = 1;
+				$sub->(@_);
+			};
 		} else {
 			require YAML;
-			return YAML->can($routine);
+			my $sub = YAML->can($routine);
+			return sub {
+				local $YAML::LoadBlessed = 1;
+				$sub->(@_);
+			};
 		}
 	} else {
 		my $drv = (
@@ -50,7 +62,12 @@ sub _resolve {
 			require YAML && "YAML"
 		);
 		
-		return $drv->can($routine) || croak "Can't find a provided for $routine (fallback is $drv)";
+		my $sub = $drv->can($routine) || croak "Can't find a provided for $routine (fallback is $drv)";
+		return sub {
+			local $YAML::LoadBlessed = 1;
+			local $YAML::XS::LoadBlessed = 1;
+			$sub->(@_);
+		};
 	}
 }
 
